@@ -12,7 +12,12 @@ pub fn init(gpiob: &GPIOB, rcc: &RCC) {
     rcc.apb2enr.modify(|_, w| w.iopben().enabled());
 
     gpiob.crh.modify(|_, w| {
-        w.mode12()
+        w
+            .mode11()
+            .bits(0b10)
+            .cnf11()
+            .bits(0b00)
+            .mode12()
             .bits(0b10)
             .cnf12()
             .bits(0b00)
@@ -56,6 +61,7 @@ macro_rules! pin {
     }
 }
 
+pin!(PB11, bs11, br11);
 pin!(PB12, bs12, br12);
 pin!(PB13, bs13, br13);
 pin!(PB14, bs14, br14);
